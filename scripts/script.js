@@ -109,7 +109,7 @@ jv = {
           type: 'POST',
           data: {
             domain: 'jayavarma.com',
-            to: 'jusrwin@gmail.com',
+            to: 'jayakvarma@gmail.com',
             from: name + ' <' + email + '>',
             subject: 'JayaVarma.com Contact Form | From: ' + name,
             text: message
