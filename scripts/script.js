@@ -50,7 +50,7 @@ jv = {
 				return false;
 			}
 
-			return true;		
+			return true;
 		}();
 
 		var appendError = function(error){
@@ -95,22 +95,30 @@ jv = {
 
 		$('form#form_contact').bind('submit', function(e){
 			e.preventDefault();
-			
+
 			var $form = $(this),
 				name = $form.find('#name').val(),
 				email = $form.find('#email').val(),
 				message = $form.find('#message').val();
-			
-			//console.log('Submit form', that.validateForm(), {name: name, email: email, message: message});
-			
-			$.ajax({
-				url: 'email.php',
-				method: 'POST',
-				data: {name: name, email: email, message: message},
-				success: function(data){
-					$form.replaceWith('<p>Thanks for getting in touch with me!');
-				}
-			});
+
+			if (!that.validateForm()) {
+				return false;
+			} else {
+				$.ajax({
+					url: '/mail',
+					type: 'POST',
+					data: {
+						domain: 'jayavarma.com',
+						to: 'jusrwin@gmail.com',
+						from: name + ' <' + email + '>',
+						subject: 'JayaVarma.com Contact Form | From: ' + name,
+						text: message
+					},
+					success: function(data){
+						$form.replaceWith('<p>Thanks for getting in touch with me!</p>');
+					}
+				});
+			}
 		});
 	}
 }
